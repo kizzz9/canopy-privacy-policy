@@ -217,6 +217,63 @@ pre.term {
 pre.term .c { color: #6E8F7A; }
 pre.term .p { color: #5BE49B; user-select: none; }
 
+/* ガイド誘導カード（中身のプレビュー付き） */
+.cta .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 2px 0 16px; }
+.cta .chips span {
+  font-family: var(--mono); font-size: .72em; letter-spacing: .05em;
+  color: var(--hero-accent); border: 1px solid rgba(91,228,155,.3);
+  border-radius: 6px; padding: 3px 10px; background: rgba(91,228,155,.06);
+}
+
+/* お問い合わせカード: 用途別カラーストライプ + mono タグ */
+.card { position: relative; overflow: hidden; }
+.card .tag {
+  display: inline-block; font-family: var(--mono); font-size: .68em; font-weight: 700;
+  letter-spacing: .12em; border-radius: 6px; padding: 3px 10px; margin-bottom: 14px;
+}
+.card.t-bug::before, .card.t-idea::before, .card.t-q::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.card.t-bug::before { background: #D9544A; }
+.card.t-bug .tag { background: rgba(217,84,74,.14); color: #E0766D; }
+.card.t-idea::before { background: var(--accent); }
+.card.t-idea .tag { background: var(--accent-soft); color: var(--accent); }
+.card.t-q::before { background: #48A8D8; }
+.card.t-q .tag { background: rgba(72,168,216,.14); color: #5FB6E0; }
+
+/* FAQ 採番 */
+summary .qn { font-family: var(--mono); font-size: .8em; color: var(--accent); font-weight: 600; min-width: 34px; }
+
+/* プライバシー監査カード（Canopy 風セルフオーディット） */
+.audit {
+  display: grid; grid-template-columns: 170px 1fr; gap: 34px; align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 34px;
+}
+.audit .ringwrap { text-align: center; }
+.audit .ring {
+  width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 12px;
+  background: conic-gradient(var(--accent) 0turn 1turn);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 44px var(--glow);
+}
+.audit .ring .inner {
+  width: 116px; height: 116px; border-radius: 50%; background: var(--surface);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.audit .ring .grade { font-weight: 900; font-size: 44px; color: var(--accent); line-height: 1; }
+.audit .ring .score { font-family: var(--mono); font-size: .72em; color: var(--muted); margin-top: 4px; }
+.audit .ringwrap .label { font-family: var(--mono); font-size: .7em; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.audit .crow { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.audit .crow:last-child { border-bottom: none; }
+.audit .st {
+  font-family: var(--mono); font-size: .7em; font-weight: 700; letter-spacing: .08em;
+  color: var(--accent); background: var(--accent-soft); border-radius: 6px;
+  padding: 3px 0; text-align: center;
+}
+.audit .crow h3 { font-size: .98em; font-weight: 700; margin-bottom: 2px; }
+.audit .crow p { color: var(--muted); font-size: .88em; margin: 0; }
+@media (max-width: 720px) { .audit { grid-template-columns: 1fr; } }
+
 /* フッター */
 footer { border-top: 1px solid var(--line); padding: 34px 24px; text-align: center; color: var(--muted); font-size: .85em; }
 footer nav { margin-bottom: 8px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
@@ -262,17 +319,18 @@ footer a:hover { text-decoration: underline; }
 <section class="section">
 <span class="eyebrow">Summary</span>
 <h2>En bref</h2>
-<div class="cta"><span class="emoji">🔒</span><div><h3>Canopy ne collecte aucune donnée utilisateur. Tous les traitements s'exécutent localement sur votre Mac.</h3></div></div>
-</section>
-<section class="section">
-<span class="eyebrow">Details</span>
-<h2>Politique complète</h2>
-<p class="sub">&nbsp;</p>
-<div class="grid">
-<div class="card"><span class="emoji">📊</span><h3>Collecte de données</h3><p>Canopy ne collecte aucune information personnelle, donnée d'utilisation ou donnée analytique. Aucun suivi d'aucune sorte n'est effectué.</p></div>
-<div class="card"><span class="emoji">🌐</span><h3>Communication réseau</h3><p>Canopy ne se connecte pas à Internet. Tous les traitements s'exécutent entièrement sur votre Mac.</p></div>
-<div class="card"><span class="emoji">📁</span><h3>Accès aux fichiers</h3><p>Canopy accède en lecture seule aux fichiers du dossier de projet SwiftUI que vous avez sélectionné. Le contenu des fichiers n'est jamais envoyé à l'extérieur ni modifié de quelque façon que ce soit.</p></div>
-<div class="card"><span class="emoji">🤝</span><h3>Partage avec des tiers</h3><p>Aucune donnée, y compris les informations personnelles, n'est jamais partagée avec des tiers.</p></div>
+<p class="sub">Canopy ne collecte aucune donnée utilisateur. Tous les traitements s'exécutent localement sur votre Mac.</p>
+<div class="audit">
+  <div class="ringwrap">
+    <div class="ring"><div class="inner"><span class="grade">A</span><span class="score">100 / 100</span></div></div>
+    <span class="label">Privacy Self-Audit</span>
+  </div>
+  <div>
+    <div class="crow"><span class="st">NONE</span><div><h3>Collecte de données</h3><p>Canopy ne collecte aucune information personnelle, donnée d'utilisation ou donnée analytique. Aucun suivi d'aucune sorte n'est effectué.</p></div></div>
+    <div class="crow"><span class="st">NONE</span><div><h3>Communication réseau</h3><p>Canopy ne se connecte pas à Internet. Tous les traitements s'exécutent entièrement sur votre Mac.</p></div></div>
+    <div class="crow"><span class="st">READ-ONLY</span><div><h3>Accès aux fichiers</h3><p>Canopy accède en lecture seule aux fichiers du dossier de projet SwiftUI que vous avez sélectionné. Le contenu des fichiers n'est jamais envoyé à l'extérieur ni modifié de quelque façon que ce soit.</p></div></div>
+    <div class="crow"><span class="st">NONE</span><div><h3>Partage avec des tiers</h3><p>Aucune donnée, y compris les informations personnelles, n'est jamais partagée avec des tiers.</p></div></div>
+  </div>
 </div>
 </section>
 <section class="section">
